@@ -1,6 +1,5 @@
 package com.anagha.assignment.adapter
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.text.Html
 import android.view.LayoutInflater
@@ -8,30 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-
 import com.anagha.assignment.R
 import com.anagha.assignment.models.Row
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 
-import java.io.FileNotFoundException
-
 class ProductsAdapter(internal var data: List<Row>) : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
-    private val options: DisplayImageOptions
-
-    init {
-        options = DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_launcher_foreground)
-                .showImageForEmptyUri(R.drawable.ic_launcher_foreground)
-                .showImageOnFail(R.drawable.ic_launcher_foreground)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build()
-    }
+    private val options: DisplayImageOptions = DisplayImageOptions.Builder()
+            .showImageOnLoading(R.drawable.ic_launcher_foreground)
+            .showImageForEmptyUri(R.drawable.ic_launcher_foreground)
+            .showImageOnFail(R.drawable.ic_launcher_foreground)
+            .cacheInMemory(true)
+            .cacheOnDisk(true)
+            .considerExifParams(true)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .build()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
         val myViewHolder: ProductsViewHolder
