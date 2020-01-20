@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragments)
         val transaction = supportFragmentManager.beginTransaction()
+
         val fragment = ProductsFragment()
         transaction.add(R.id.products_fragment, fragment)
         //mToolbar.setTitle("Read Review");

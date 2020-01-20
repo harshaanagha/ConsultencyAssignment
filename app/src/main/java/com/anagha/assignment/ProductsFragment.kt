@@ -1,5 +1,6 @@
 package com.anagha.assignment
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.anagha.assignment.adapter.ProductsAdapter
 import com.anagha.assignment.models.Row
@@ -44,13 +46,11 @@ import java.util.HashMap
 
 class ProductsFragment : Fragment() {
     private var readReviewsView: View? = null
+    private var sreadReviewsRCV: SwipeRefreshLayout? = null
     private var readReviewsRCV: RecyclerView? = null
     private var productsadapter: ProductsAdapter? = null
     private var emptyTV: TextView? = null
-
     private var progressDialog: ProgressDialog? = null
-    // private Toolbar mToolbar   ;
-
 
     override fun onAttach(activity: Context?) {
         super.onAttach(activity)
@@ -59,7 +59,20 @@ class ProductsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         readReviewsView = inflater.inflate(R.layout.productslist, container, false)
         onInitUi()
+        onUIListener();
         return readReviewsView
+    }
+
+    private fun onUIListener() {
+
+        sreadReviewsRCV?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            if (NetworkUtil.hasNetwork(context!!)) {
+                getProductReviews()
+                sreadReviewsRCV!!.isRefreshing=false
+            } else {
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +81,7 @@ class ProductsFragment : Fragment() {
 
     private fun onInitUi() {
         readReviewsRCV = readReviewsView!!.findViewById(R.id.products_recyclerview)
+        sreadReviewsRCV = readReviewsView!!.findViewById(R.id.products_Srecyclerview)
         emptyTV = readReviewsView!!.findViewById(R.id.emptyTV)
         //mToolbar = (Toolbar).findViewById(R.id.toolbar);
         readReviewsRCV!!.setHasFixedSize(true)

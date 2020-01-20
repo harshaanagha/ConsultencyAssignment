@@ -23,6 +23,13 @@
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
             android:visibility="gone" />
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/products_Srecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/products_recyclerview"
@@ -30,6 +37,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:padding="5dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </RelativeLayout>
 </LinearLayout>
 
